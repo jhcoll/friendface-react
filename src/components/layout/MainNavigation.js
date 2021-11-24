@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import { useState } from "react";
 import NewPostPage from "../../pages/NewPost";
 import classes from "./MainNavigation.module.css";
 import Post from "../UI/Post";
 
-function MainNavigation() {
-    const [showForm, setShowForm] = useState(false);
+function MainNavigation(props) {
+  const [showForm, setShowForm] = useState(false);
   function addForm() {
-      setShowForm(true);
+    setShowForm(true);
   }
   function cancelForm() {
-      setShowForm(false);
+    setShowForm(false);
   }
   return (
     <div>
@@ -25,18 +25,25 @@ function MainNavigation() {
             </li>
             <li>
               <label onClick={addForm}>New Post</label>
-              {/* <Link to="/addpost">New Post</Link> */}
             </li>
           </ul>
         </nav>
       </header>
-      {showForm ?
-      <div className={classes.NewPostPage}>
+      {showForm ? (
+        <div className={classes.NewPostPage}>
           <Post>
-            <button className={classes.cancel} onClick={cancelForm}>cancel</button>
-            <NewPostPage onClick={cancelForm}/>
+            <button className={classes.cancel} onClick={cancelForm}>
+              cancel
+            </button>
+            <NewPostPage
+              onClick={cancelForm}
+              setRefreshPost={props.setRefreshPost}
+            />
           </Post>
-      </div> :''}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

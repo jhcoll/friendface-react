@@ -1,9 +1,6 @@
 import AddPostForm from "../components/posts/AddPostForm.js";
-import { useNavigate } from "react-router-dom";
 
 function NewPostPage(props) {
-  const navigate = useNavigate();
-
   function onAddPostHandler(postData) {
     fetch(
       "https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts.json",
@@ -15,10 +12,10 @@ function NewPostPage(props) {
         },
       }
     ).then(() => {
-        navigate("/", { replace: true });
-        props.onClick();
+      props.setRefreshPost(true);
+      props.onClick();
     });
-}
+  }
   return (
     <div>
       <AddPostForm onAddPost={onAddPostHandler} />

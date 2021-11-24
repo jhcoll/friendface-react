@@ -12,6 +12,7 @@ function PostList(props) {
           author={post.author}
           date={post.date}
           content={post.content}
+          setRefreshPost={props.setRefreshPost}
         />
       ))}
     </ul>

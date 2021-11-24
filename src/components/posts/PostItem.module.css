@@ -3,7 +3,7 @@
 }
 
 .image {
-  width: 10%;
+  width: 5em;
   height: 5em;
   overflow: hidden;
   border-top-left-radius: 10px;
@@ -11,7 +11,7 @@
 }
 
 .image img {
-  width: 100%;
+  width: 5em;
 }
 
 .content {
@@ -20,12 +20,12 @@
 }
 
 .top {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .content h3 {
-    padding-left: 10px;
+  padding-left: 10px;
   font-size: 1.25rem;
   float: left;
   color: inherit;
