@@ -10,9 +10,8 @@ function LikeButton({ id, setLikeCount, likeCount }) {
           "Content-Type": "application/json",
         },
       }
-    ).then(() => {
-      setLikeCount(likeCount + 1);
-    });
+    );
+    setLikeCount(likeCount + 1);
   }
 
   return <button onClick={likePost}>like</button>;
