@@ -1,7 +1,14 @@
 import Post from "../UI/Post";
+import DeleteButton from "./buttons/DeleteButton";
 import classes from "./PostItem.module.css";
 
 function PostItem(props) {
+  function likeHandler() {
+    console.log(props.id);
+  }
+  function editHandler() {
+    console.log(props.id);
+  }
   return (
     <li className={classes.item}>
       <Post>
@@ -15,18 +22,20 @@ function PostItem(props) {
           />
         </div>
         <div className={classes.content}>
-            <div className={classes.top}>
-                <h3>{props.author}</h3>
-                <h4>{props.date}</h4>
-            </div>
+          <div className={classes.top}>
+            <h3>{props.author}</h3>
+            <h4>{props.date}</h4>
+          </div>
           <h5>{props.content}</h5>
         </div>
         <div className={classes.actions}>
           <div className={classes.like}>
-            <button>like</button>
+            
+            <button onClick={likeHandler}>like</button>
           </div>
-          <button>edit</button>
-          <button>delete</button>
+          <button onClick={editHandler}>edit</button>
+          {/* <button onClick={deleteHandler}>delete</button> */}
+          <DeleteButton id={props.id} setRefreshPost={props.setRefreshPost}/>
         </div>
       </Post>
     </li>

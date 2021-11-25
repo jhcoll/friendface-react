@@ -1,23 +1,28 @@
 import FeedPage from "./pages/Feed.js";
-// import NewPostPage from "./pages/NewPost.js";
 import { Routes, Route } from "react-router-dom";
+import { React, useState } from "react";
+import MainNavigation from "./components/layout/MainNavigation";
 
 function App() {
+  const [refreshPost, setRefreshPost] = useState(false);
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<FeedPage />} />
-        {/* <Route path="/addpost" element={<NewPostPage />} /> */}
-      </Routes>
-    </div>
+    <>
+      <MainNavigation setRefreshPost={setRefreshPost} />
+      <div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <FeedPage
+                refreshPost={refreshPost}
+                setRefreshPost={setRefreshPost}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </>
   );
 }
 
 export default App;
-
-// import Todo from "./components/Todo.js";
-
-//    <h1>My Todos</h1>
-//   <Todo text='Learn react'/>
-//   <Todo text='Beat Conran at chess'/>
-//   <Todo text="Make sure Conran knows he's bad at chess"/>
