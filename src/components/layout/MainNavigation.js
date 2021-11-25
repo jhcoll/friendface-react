@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import NewPostPage from "../../pages/NewPost";
 import classes from "./MainNavigation.module.css";
 import Post from "../UI/Post";
+import Backdrop from "../UI/Backdrop";
 
 function MainNavigation(props) {
   const [showForm, setShowForm] = useState(false);
@@ -21,26 +21,23 @@ function MainNavigation(props) {
         <nav>
           <ul>
             <li>
-              <Link to="/">Feed</Link>
-            </li>
-            <li>
               <label onClick={addForm}>New Post</label>
             </li>
           </ul>
         </nav>
       </header>
       {showForm ? (
-        <div className={classes.NewPostPage}>
-          <Post>
-            <button className={classes.cancel} onClick={cancelForm}>
-              cancel
-            </button>
-            <NewPostPage
-              onClick={cancelForm}
-              setRefreshPost={props.setRefreshPost}
-            />
-          </Post>
-        </div>
+        <>
+          <div className={classes.NewPostPage}>
+            <Post>
+              <NewPostPage
+                onCancel={cancelForm}
+                setRefreshPost={props.setRefreshPost}
+              />
+            </Post>
+          </div>
+          <Backdrop onClick={cancelForm} />
+        </>
       ) : (
         ""
       )}

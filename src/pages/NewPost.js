@@ -18,7 +18,7 @@ function NewPostPage(props) {
   }
   return (
     <div>
-      <AddPostForm onAddPost={onAddPostHandler} />
+      <AddPostForm onAddPost={onAddPostHandler} onCancel={props.onCancel} />
     </div>
   );
 }

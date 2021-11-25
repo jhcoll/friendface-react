@@ -59,16 +59,15 @@
   margin-left: 0.5rem;
 }
 
-
-.NewPostPage{
+.NewPostPage {
   position: fixed;
-  z-index: 100;
+  z-index: 10;
   margin-left: 25%;
   margin-top: 5%;
-  width: 50%
+  width: 50%;
 }
 
-.cancel{
+.cancel {
   float: right;
   font: inherit;
   cursor: pointer;
