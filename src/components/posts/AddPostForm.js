@@ -3,20 +3,17 @@ import classes from "./AddPostForm.module.css";
 
 function AddPostForm(props) {
   const authorInputRef = useRef();
-  // const dateInputRef = useRef();
   const avatarInputRef = useRef();
   const contentInputRef = useRef();
 
   function submitHandler(event) {
     event.preventDefault();
     const enteredAuthor = authorInputRef.current.value;
-    // const enteredDate = dateInputRef.current.value;
     const enteredDate = new Date().toISOString().slice(0, 10);
     const enteredAvatar = avatarInputRef.current.value;
     const enteredContent = contentInputRef.current.value;
 
     authorInputRef.current.value = "";
-    // dateInputRef.current.value = "";
     avatarInputRef.current.value = "#000000";
     contentInputRef.current.value = "";
 
@@ -25,7 +22,7 @@ function AddPostForm(props) {
       avatar: enteredAvatar,
       date: enteredDate,
       content: enteredContent,
-      likes: 0
+      likes: 0,
     };
 
     props.onAddPost(postData);
@@ -36,10 +33,6 @@ function AddPostForm(props) {
         <label htmlFor="author">Author: </label>
         <input type="text" required id="author" ref={authorInputRef} />
       </div>
-      {/* <div className={classes.control}>
-        <label htmlFor="date">Date: </label>
-        <input type="date" required id="date" ref={dateInputRef} />
-      </div> */}
       <div className={classes.control}>
         <label htmlFor="avatarColour">Avatar Colour: </label>
         <input type="color" required id="avatarColour" ref={avatarInputRef} />
@@ -49,6 +42,7 @@ function AddPostForm(props) {
         <textarea id="content" required rows="5" ref={contentInputRef} />
       </div>
       <div className={classes.actions}>
+        <button onClick={props.onCancel}>Cancel</button>
         <button>Post</button>
       </div>
     </form>
