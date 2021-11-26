@@ -13,7 +13,6 @@ function PostList({ posts }) {
       posts.reverse();
     }
   } else {
-    console.log(posts);
     orderByName();
     if (orderUpDown) {
       posts.reverse();
