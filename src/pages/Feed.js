@@ -1,5 +1,5 @@
-import PostList from "../components/posts/PostList.js";
 import { useState, useEffect } from "react";
+import OrderPosts from "../components/posts/OrderPosts.js";
 
 function FeedPage({ setRefreshPost, refreshPost }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ function FeedPage({ setRefreshPost, refreshPost }) {
   }
   return (
     <div>
-      <PostList posts={loadedPosts}></PostList>
+      <OrderPosts posts={loadedPosts}></OrderPosts>
     </div>
   );
 }
