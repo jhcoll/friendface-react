@@ -53,8 +53,12 @@
 }
 
 .actions {
-  padding: 1.5rem;
+  padding-left: 2%;
+  padding-right: 2%;
+
   text-align: center;
+  width: 100%;
+  padding-bottom: 3em;
 }
 
 .likeCount {
@@ -63,7 +67,17 @@
 
 .like {
   float: left;
-  margin-right: 63%;
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+.likeCount {
+  align-self: center;
+}
+
+.rightAction {
+  float: right;
 }
 
 .actions button {
@@ -73,7 +87,7 @@
   border: 1px solid #77002e;
   background-color: transparent;
   padding: 0.5rem 1.5rem;
-  margin: 3px;
+  margin: 2px;
   border-radius: 4px;
 }
 

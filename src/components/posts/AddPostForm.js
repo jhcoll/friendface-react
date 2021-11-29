@@ -43,7 +43,9 @@ function AddPostForm(props) {
       </div>
       <div className={classes.actions}>
         <button onClick={props.onCancel}>Cancel</button>
-        <button>Post</button>
+        <div className={classes.submit}>
+          <button>Post</button>
+        </div>
       </div>
     </form>
   );

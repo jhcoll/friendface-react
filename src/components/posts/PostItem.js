@@ -39,7 +39,6 @@ function PostItem({ likes, content, avatar, id, author, date }) {
               </div>
               <h5>{contentText}</h5>
             </div>
-            <div className={classes.likeCount}>{likeCount}</div>
             <div className={classes.actions}>
               <div className={classes.like}>
                 <ButtonAction
@@ -49,9 +48,12 @@ function PostItem({ likes, content, avatar, id, author, date }) {
                   setLikeCount={setLikeCount}
                   likeCount={likeCount}
                 />
+                <div className={classes.likeCount}>{likeCount}</div>
               </div>
+              <div className={classes.rightAction}>
               <button onClick={editHandler}>edit</button>
               <button onClick={deleteHandler}>delete</button>
+              </div>
             </div>
           </Post>
           {showDeleteAlert && (
