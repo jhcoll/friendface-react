@@ -1,13 +1,20 @@
+import { useState } from "react/cjs/react.development";
 import Post from "../UI/Post";
+import Backdrop from "../UI/Backdrop";
 import DeleteButton from "./buttons/DeleteButton";
+import EditModal from "./buttons/EditModal";
+import LikeButton from "./buttons/LikeButton";
 import classes from "./PostItem.module.css";
 
 function PostItem(props) {
-  function likeHandler() {
-    console.log(props.id);
-  }
+  const [showEdit, setShowEdit] = useState(false);
+  const [likeCount, setLikeCount] = useState(props.likes);
   function editHandler() {
-    console.log(props.id);
+    if (showEdit) {
+      setShowEdit(false);
+    } else {
+      setShowEdit(true);
+    }
   }
   return (
     <li className={classes.item}>
@@ -28,16 +35,28 @@ function PostItem(props) {
           </div>
           <h5>{props.content}</h5>
         </div>
+        <div className={classes.likeCount}>{likeCount}</div>
         <div className={classes.actions}>
           <div className={classes.like}>
-            
-            <button onClick={likeHandler}>like</button>
+            <LikeButton
+              id={props.id}
+              setLikeCount={setLikeCount}
+              likeCount={likeCount}
+            />
           </div>
           <button onClick={editHandler}>edit</button>
-          {/* <button onClick={deleteHandler}>delete</button> */}
-          <DeleteButton id={props.id} setRefreshPost={props.setRefreshPost}/>
+          <DeleteButton id={props.id} setRefreshPost={props.setRefreshPost} />
         </div>
       </Post>
+      {showEdit && (
+        <EditModal
+          onClick={editHandler}
+          content={props.content}
+          id={props.id}
+          setRefreshPost={props.setRefreshPost}
+        />
+      )}
+      {showEdit && <Backdrop onClick={editHandler} />}
     </li>
   );
 }

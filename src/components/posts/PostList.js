@@ -1,5 +1,5 @@
 import PostItem from "./PostItem";
-import classes from "./PostList.module.css"
+import classes from "./PostList.module.css";
 
 function PostList(props) {
   return (
@@ -12,6 +12,7 @@ function PostList(props) {
           author={post.author}
           date={post.date}
           content={post.content}
+          likes={post.likes}
           setRefreshPost={props.setRefreshPost}
         />
       ))}
