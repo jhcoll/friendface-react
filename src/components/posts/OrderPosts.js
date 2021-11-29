@@ -1,13 +1,38 @@
 import classes from "./OrderPosts.module.css";
+import PostList from "./PostList";
+import { useState } from "react";
 
-function OrderPosts({
-  orderUpDown,
-  setOrderUpDown,
-  authorDate,
-  setAuthorDate,
-}) {
-  function upDownHandler() {
-    setOrderUpDown(!orderUpDown);
+function OrderPosts({ posts }) {
+  const [orderUpDown, setOrderUpDown] = useState(true);
+  const [authorDate, setAuthorDate] = useState(true);
+  if (authorDate) {
+    orderByDate();
+    if (!orderUpDown) {
+      posts.reverse();
+    }
+  } else {
+    orderByName();
+    if (orderUpDown) {
+      posts.reverse();
+    }
+  }
+
+  function orderByDate() {
+    posts.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
+  }
+
+  function orderByName() {
+    posts.sort(function (a, b) {
+      return a.author.localeCompare(b.author);
+    });
+  }
+  function upHandler() {
+    setOrderUpDown(false);
+  }
+  function downHandler() {
+    setOrderUpDown(true);
   }
   function authorHandler() {
     setAuthorDate(false);
@@ -53,7 +78,8 @@ function OrderPosts({
           )}
         </button>
       </div>
-    </div>
+      <PostList posts={posts} />
+    </>
   );
 }
 
