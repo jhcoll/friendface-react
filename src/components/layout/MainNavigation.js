@@ -3,14 +3,21 @@ import NewPostPage from "../../pages/NewPost";
 import classes from "./MainNavigation.module.css";
 import Post from "../UI/Post";
 import Backdrop from "../UI/Backdrop";
+import ErrorModal from "../UI/ErrorModal";
 
-function MainNavigation({setRefreshPost}) {
+function MainNavigation({ setRefreshPost }) {
   const [showForm, setShowForm] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorText, setErrorText] = useState("");
   function addForm() {
     setShowForm(true);
   }
   function cancelForm() {
     setShowForm(false);
+  }
+
+  function errorHandler() {
+    setShowError(!showError);
   }
   return (
     <div>
@@ -33,10 +40,20 @@ function MainNavigation({setRefreshPost}) {
               <NewPostPage
                 onCancel={cancelForm}
                 setRefreshPost={setRefreshPost}
+                setErrorText={setErrorText}
+                setShowError={setShowError}
               />
             </Post>
           </div>
           <Backdrop onClick={cancelForm} />
+        </>
+      ) : (
+        ""
+      )}
+      {showError ? (
+        <>
+          <ErrorModal onClick={errorHandler} text={errorText}/>
+          <Backdrop onClick={errorHandler} zIndex={14}/>
         </>
       ) : (
         ""

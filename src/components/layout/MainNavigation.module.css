@@ -61,7 +61,7 @@
 
 .NewPostPage {
   position: fixed;
-  z-index: 10;
+  z-index: 2;
   margin-left: 25%;
   margin-top: 5%;
   width: 50%;
