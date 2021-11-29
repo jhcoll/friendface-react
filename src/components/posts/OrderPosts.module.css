@@ -12,6 +12,11 @@
   margin-left: 10px;
 }
 
+.actions img {
+  width: 20px;
+  height: 14px;
+}
+
 .actions button {
   font: inherit;
   cursor: pointer;
