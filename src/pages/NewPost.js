@@ -1,6 +1,6 @@
 import AddPostForm from "../components/posts/AddPostForm.js";
 
-function NewPostPage({ setRefreshPost, onCancel }) {
+function NewPostPage({ setRefreshPost, onCancel, setShowError, setErrorText }) {
   function onAddPostHandler(postData) {
     fetch(
       "https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts.json",
@@ -18,7 +18,7 @@ function NewPostPage({ setRefreshPost, onCancel }) {
   }
   return (
     <div>
-      <AddPostForm onAddPost={onAddPostHandler} onCancel={onCancel} />
+      <AddPostForm onAddPost={onAddPostHandler} onCancel={onCancel} setShowError={setShowError} setErrorText={setErrorText} />
     </div>
   );
 }
