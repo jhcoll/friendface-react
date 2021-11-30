@@ -38,7 +38,6 @@ function OrderPosts({ posts }) {
   function dateHandler() {
     setAuthorDate(true);
   }
-  console.log(posts);
   return (
     <div className={classes.order}>
       <div className={classes.actions}>
