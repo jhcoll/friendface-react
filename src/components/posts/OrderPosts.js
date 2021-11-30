@@ -5,6 +5,7 @@ import { useState } from "react";
 function OrderPosts({ posts }) {
   const [orderUpDown, setOrderUpDown] = useState(true);
   const [authorDate, setAuthorDate] = useState(true);
+  
   if (authorDate) {
     orderByDate();
     if (!orderUpDown) {
@@ -28,11 +29,8 @@ function OrderPosts({ posts }) {
       return a.author.localeCompare(b.author);
     });
   }
-  function upHandler() {
-    setOrderUpDown(false);
-  }
-  function downHandler() {
-    setOrderUpDown(true);
+  function upDownHandler() {
+    setOrderUpDown(!orderUpDown);
   }
   function authorHandler() {
     setAuthorDate(false);
@@ -40,6 +38,7 @@ function OrderPosts({ posts }) {
   function dateHandler() {
     setAuthorDate(true);
   }
+  console.log(posts);
   return (
     <div className={classes.order}>
       <div className={classes.actions}>
@@ -79,7 +78,7 @@ function OrderPosts({ posts }) {
         </button>
       </div>
       <PostList posts={posts} />
-    </>
+    </div>
   );
 }
 

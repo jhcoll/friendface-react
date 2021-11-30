@@ -23,7 +23,7 @@ function PostItem({ likes, content, avatar, id, author, date }) {
 
   return (
     <>
-      {postDelete ? (
+      {postDelete && (
         <li className={classes.item}>
           <Post>
             <div className={classes.image} style={{ backgroundColor: avatar }}>
@@ -43,10 +43,8 @@ function PostItem({ likes, content, avatar, id, author, date }) {
               <div className={classes.like}>
                 <ButtonAction
                   buttonTitle="like"
-                  id={id}
                   buttonFunction={LikeHandler}
-                  setLikeCount={setLikeCount}
-                  likeCount={likeCount}
+                  params={{id: id, setLikeCount: setLikeCount, likeCount: likeCount}}
                 />
                 <div className={classes.likeCount}>{likeCount}</div>
               </div>
@@ -65,10 +63,8 @@ function PostItem({ likes, content, avatar, id, author, date }) {
                     <button onClick={deleteHandler}>cancel</button>
                     <ButtonAction
                       buttonTitle="delete"
-                      id={id}
                       buttonFunction={DeletePost}
-                      setPostDelete={setPostDelete}
-                      setShowDeleteAlert={setShowDeleteAlert}
+                      params={{id: id, setPostDelete: setPostDelete, setShowDeleteAlert: setShowDeleteAlert}}
                     />
                   </div>
                 </div>
@@ -86,8 +82,6 @@ function PostItem({ likes, content, avatar, id, author, date }) {
           )}
           {showEdit && <Backdrop onClick={editHandler} />}
         </li>
-      ) : (
-        ""
       )}
     </>
   );
