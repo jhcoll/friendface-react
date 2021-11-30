@@ -41,53 +41,42 @@ function OrderPosts({ posts }) {
     setAuthorDate(true);
   }
   return (
-    <>
-      <div className={classes.order}>
-        <div className={classes.actions}>
-          {orderUpDown ? (
-            <button onClick={upHandler}>UP</button>
-          ) : (
-            <button onClick={upHandler} style={{ backgroundColor: "blue" }}>
-              UP
-            </button>
-          )}
-        </div>
-
+    <div className={classes.order}>
+      <div className={classes.actions}>
         {authorDate ? (
           <>
-            <div>
-              <button onClick={dateHandler} style={{ backgroundColor: "blue" }}>
-                Date
-              </button>
-            </div>
-            <div>
-              <button onClick={authorHandler}>Author</button>
-            </div>
+            <button
+              onClick={dateHandler}
+              style={{ backgroundColor: "#ba7a92" }}
+            >
+              Date
+            </button>
+            <button onClick={authorHandler}>Author</button>
           </>
         ) : (
           <>
-            <div>
-              <button onClick={dateHandler}>Date</button>
-            </div>
-            <div>
-              <button
-                onClick={authorHandler}
-                style={{ backgroundColor: "blue" }}
-              >
-                Author
-              </button>
-            </div>
+            <button onClick={dateHandler}>Date</button>
+            <button
+              onClick={authorHandler}
+              style={{ backgroundColor: "#ba7a92" }}
+            >
+              Author
+            </button>
           </>
         )}
-        <div className={classes.actions}>
+        <button onClick={upDownHandler}>
           {orderUpDown ? (
-            <button onClick={downHandler} style={{ backgroundColor: "blue" }}>
-              DOWN
-            </button>
+            <img
+              src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/24/000000/external-up-arrows-dreamstale-lineal-dreamstale-12.png"
+              alt="upArrow"
+            />
           ) : (
-            <button onClick={downHandler}>DOWN</button>
+            <img
+              src="https://img.icons8.com/ios/50/000000/double-down.png"
+              alt="downArrow"
+            />
           )}
-        </div>
+        </button>
       </div>
       <PostList posts={posts} />
     </>

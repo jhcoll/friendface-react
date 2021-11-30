@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import classes from "./AddPostForm.module.css";
 
-function AddPostForm(props) {
+function AddPostForm({onCancel, onAddPost, setErrorText, setShowError}) {
   const authorInputRef = useRef();
   const avatarInputRef = useRef();
   const contentInputRef = useRef();
@@ -13,20 +13,40 @@ function AddPostForm(props) {
     const enteredAvatar = avatarInputRef.current.value;
     const enteredContent = contentInputRef.current.value;
 
-    authorInputRef.current.value = "";
-    avatarInputRef.current.value = "#000000";
-    contentInputRef.current.value = "";
+    if(validation(enteredAuthor, enteredContent)){
+      authorInputRef.current.value = "";
+      avatarInputRef.current.value = "#000000";
+      contentInputRef.current.value = "";
+  
+      const postData = {
+        author: enteredAuthor,
+        avatar: enteredAvatar,
+        date: enteredDate,
+        content: enteredContent,
+        likes: 0,
+      };
+  
+      onAddPost(postData);
+    } else {
 
-    const postData = {
-      author: enteredAuthor,
-      avatar: enteredAvatar,
-      date: enteredDate,
-      content: enteredContent,
-      likes: 0,
-    };
-
-    props.onAddPost(postData);
+    }
   }
+
+  function validation(Author, Content){
+    const inputRegex = /(^[A-z0-9À-ž.,'!?&$%()\s]+$)/;
+    if(!inputRegex.test(Author)){
+      setErrorText("Invalid Author Entry")
+      setShowError(true);
+      return false;
+    } else if(!inputRegex.test(Content)){
+      setErrorText("Invalid Content Entry")
+      setShowError(true);
+      return false;
+    }else {
+      return true;
+    }
+  }
+
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
@@ -42,8 +62,10 @@ function AddPostForm(props) {
         <textarea id="content" required rows="5" ref={contentInputRef} />
       </div>
       <div className={classes.actions}>
-        <button onClick={props.onCancel}>Cancel</button>
-        <button>Post</button>
+        <button onClick={onCancel}>Cancel</button>
+        <div className={classes.submit}>
+          <button>Post</button>
+        </div>
       </div>
     </form>
   );

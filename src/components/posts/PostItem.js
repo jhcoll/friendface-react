@@ -1,23 +1,24 @@
 import { useState } from "react/cjs/react.development";
 import Post from "../UI/Post";
 import Backdrop from "../UI/Backdrop";
-import DeleteButton from "./buttons/DeleteButton";
 import EditModal from "./buttons/EditModal";
-import LikeButton from "./buttons/LikeButton";
 import classes from "./PostItem.module.css";
+import ButtonAction from "./buttons/ButtonAction";
+import { DeletePost, LikeHandler } from "./buttons/LikeDeleteFunctions";
 
 function PostItem({ likes, content, avatar, id, author, date }) {
   const [showEdit, setShowEdit] = useState(false);
   const [likeCount, setLikeCount] = useState(likes);
   const [contentText, setContentText] = useState(content);
   const [postDelete, setPostDelete] = useState(true);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   function editHandler() {
-    if (showEdit) {
-      setShowEdit(false);
-    } else {
-      setShowEdit(true);
-    }
+    setShowEdit(!showEdit);
+  }
+
+  function deleteHandler() {
+    setShowDeleteAlert(!showDeleteAlert);
   }
 
   return (
@@ -38,19 +39,43 @@ function PostItem({ likes, content, avatar, id, author, date }) {
               </div>
               <h5>{contentText}</h5>
             </div>
-            <div className={classes.likeCount}>{likeCount}</div>
             <div className={classes.actions}>
               <div className={classes.like}>
-                <LikeButton
+                <ButtonAction
+                  buttonTitle="like"
                   id={id}
+                  buttonFunction={LikeHandler}
                   setLikeCount={setLikeCount}
                   likeCount={likeCount}
                 />
+                <div className={classes.likeCount}>{likeCount}</div>
               </div>
+              <div className={classes.rightAction}>
               <button onClick={editHandler}>edit</button>
-              <DeleteButton id={id} setPostDelete={setPostDelete} />
+              <button onClick={deleteHandler}>delete</button>
+              </div>
             </div>
           </Post>
+          {showDeleteAlert && (
+            <>
+              <Post>
+                <div className={classes.modal}>
+                  Are you sure you want to Delete?
+                  <div className={classes.actions}>
+                    <button onClick={deleteHandler}>cancel</button>
+                    <ButtonAction
+                      buttonTitle="delete"
+                      id={id}
+                      buttonFunction={DeletePost}
+                      setPostDelete={setPostDelete}
+                      setShowDeleteAlert={setShowDeleteAlert}
+                    />
+                  </div>
+                </div>
+              </Post>
+              <Backdrop onClick={deleteHandler} />
+            </>
+          )}
           {showEdit && (
             <EditModal
               onClick={editHandler}
