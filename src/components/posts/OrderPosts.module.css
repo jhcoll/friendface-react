@@ -1,6 +1,6 @@
 .order {
   text-align: center;
-  display: flex;
+  display: inline;
   justify-content: center;
   margin-top: 1%;
   align-items: center;

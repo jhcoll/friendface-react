@@ -1,9 +1,5 @@
 function LikeHandler(
-  id,
-  setLikeCount,
-  likeCount,
-  setPostDelete,
-  setShowDeleteAlert
+  {id, setLikeCount, likeCount }
 ) {
   const data = { likes: likeCount + 1 };
   fetch(
@@ -20,11 +16,9 @@ function LikeHandler(
 }
 
 function DeletePost(
-  id,
-  setLikeCount,
-  likeCount,
-  setPostDelete,
-  setShowDeleteAlert
+  
+  {id, setPostDelete,
+  setShowDeleteAlert}
 ) {
   fetch(
     `https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts/${id}.json`,

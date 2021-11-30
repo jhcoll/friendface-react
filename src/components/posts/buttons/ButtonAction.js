@@ -1,21 +1,13 @@
 function ButtonAction({
   buttonTitle,
-  id,
   buttonFunction,
-  setPostDelete,
-  setLikeCount,
-  likeCount,
-  setShowDeleteAlert,
+  params
 }) {
   return (
     <button
       onClick={() =>
         buttonFunction(
-          id,
-          setLikeCount,
-          likeCount,
-          setPostDelete,
-          setShowDeleteAlert
+          params
         )
       }
     >
