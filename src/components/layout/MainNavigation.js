@@ -4,7 +4,7 @@ import classes from "./MainNavigation.module.css";
 import Post from "../UI/Post";
 import Backdrop from "../UI/Backdrop";
 
-function MainNavigation(props) {
+function MainNavigation({setRefreshPost}) {
   const [showForm, setShowForm] = useState(false);
   function addForm() {
     setShowForm(true);
@@ -32,7 +32,7 @@ function MainNavigation(props) {
             <Post>
               <NewPostPage
                 onCancel={cancelForm}
-                setRefreshPost={props.setRefreshPost}
+                setRefreshPost={setRefreshPost}
               />
             </Post>
           </div>

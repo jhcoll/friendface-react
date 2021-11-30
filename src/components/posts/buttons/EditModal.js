@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Post from "../../UI/Post";
 import classes from "./EditModal.module.css";
 
-function EditModal({ onClick, content, id, setRefreshPost }) {
+function EditModal({ onClick, id, setContentText, contentText }) {
   const contentEditRef = useRef();
   function editPost() {
     const data = { content: contentEditRef.current.value };
@@ -15,9 +15,9 @@ function EditModal({ onClick, content, id, setRefreshPost }) {
           "Content-Type": "application/json",
         },
       }
-    ).then(() => {
-      setRefreshPost(true);
-    });
+    );
+    setContentText(contentEditRef.current.value);
+    onClick();
   }
 
   return (
@@ -25,11 +25,10 @@ function EditModal({ onClick, content, id, setRefreshPost }) {
       <div className={classes.modal}>
         <div className={classes.editarea}>
           <textarea
-            id="edit"
             required
             rows="5"
             ref={contentEditRef}
-            defaultValue={content}
+            defaultValue={contentText}
           ></textarea>
         </div>
         <div className={classes.actions}>

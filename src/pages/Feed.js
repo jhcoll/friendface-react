@@ -1,13 +1,12 @@
-import PostList from "../components/posts/PostList.js";
 import { useState, useEffect } from "react";
+import OrderPosts from "../components/posts/OrderPosts.js";
 
-function FeedPage(props) {
-  const refreshPost = props.refreshPost;
+function FeedPage({ setRefreshPost, refreshPost }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPosts, setLoadedPosts] = useState([]);
 
   useEffect(() => {
-    props.setRefreshPost(false);
+    setRefreshPost(false);
     setIsLoading(true);
     fetch(
       "https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts.json"
@@ -37,10 +36,7 @@ function FeedPage(props) {
   }
   return (
     <div>
-      <PostList
-        posts={loadedPosts}
-        setRefreshPost={props.setRefreshPost}
-      ></PostList>
+      <OrderPosts posts={loadedPosts}></OrderPosts>
     </div>
   );
 }

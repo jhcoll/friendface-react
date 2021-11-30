@@ -1,7 +1,7 @@
 import classes from "./Post.module.css";
 
-function Post(props) {
-  return <div className={classes.card}>{props.children}</div>;
+function Post({ children }) {
+  return <div className={classes.card}>{children}</div>;
 }
 
 export default Post;
