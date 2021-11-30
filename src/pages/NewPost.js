@@ -18,7 +18,12 @@ function NewPostPage({ setRefreshPost, onCancel, setShowError, setErrorText }) {
   }
   return (
     <div>
-      <AddPostForm onAddPost={onAddPostHandler} onCancel={onCancel} setShowError={setShowError} setErrorText={setErrorText} />
+      <AddPostForm
+        onAddPost={onAddPostHandler}
+        onCancel={onCancel}
+        setShowError={setShowError}
+        setErrorText={setErrorText}
+      />
     </div>
   );
 }

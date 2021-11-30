@@ -1,7 +1,6 @@
 import { useState } from "react";
 import NewPostPage from "../../pages/NewPost";
 import classes from "./MainNavigation.module.css";
-import Post from "../UI/Post";
 import Backdrop from "../UI/Backdrop";
 import ErrorModal from "../UI/ErrorModal";
 
@@ -35,16 +34,12 @@ function MainNavigation({ setRefreshPost }) {
       </header>
       {showForm ? (
         <>
-          <div className={classes.NewPostPage}>
-            <Post>
-              <NewPostPage
-                onCancel={cancelForm}
-                setRefreshPost={setRefreshPost}
-                setErrorText={setErrorText}
-                setShowError={setShowError}
-              />
-            </Post>
-          </div>
+          <NewPostPage
+            onCancel={cancelForm}
+            setRefreshPost={setRefreshPost}
+            setErrorText={setErrorText}
+            setShowError={setShowError}
+          />
           <Backdrop onClick={cancelForm} />
         </>
       ) : (
@@ -52,8 +47,8 @@ function MainNavigation({ setRefreshPost }) {
       )}
       {showError ? (
         <>
-          <ErrorModal onClick={errorHandler} text={errorText}/>
-          <Backdrop onClick={errorHandler} zIndex={14}/>
+          <ErrorModal onClick={errorHandler} text={errorText} />
+          <Backdrop onClick={errorHandler} zIndex={14} />
         </>
       ) : (
         ""

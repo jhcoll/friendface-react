@@ -1,9 +1,15 @@
 .order {
   text-align: center;
-  display: inline;
+  display: flex;
   justify-content: center;
-  margin-top: 1%;
-  align-items: center;
+  margin-top: 90px;
+}
+
+.order h5{
+  padding: 0;
+  margin:0;
+  padding-right: 10px;
+  align-self:center;
 }
 
 .order label {
@@ -12,23 +18,7 @@
   margin-left: 10px;
 }
 
-.actions img {
+.order img {
   width: 20px;
   height: 14px;
-}
-
-.actions button {
-  font: inherit;
-  cursor: pointer;
-  color: #77002e;
-  border: 1px solid #77002e;
-  background-color: transparent;
-  padding: 0.5rem 1.5rem;
-  margin: 3px;
-  border-radius: 4px;
-}
-
-.actions button:hover,
-.actions button:active {
-  background-color: #ffe2ed;
 }

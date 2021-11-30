@@ -1,0 +1,15 @@
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  color: #3b5998;
+  border: 1px solid #3b5998;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  margin: 3px;
+  border-radius: 4px;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #dfe3ee;
+}
