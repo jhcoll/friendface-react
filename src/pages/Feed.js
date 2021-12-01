@@ -22,7 +22,6 @@ function FeedPage({ setRefreshPost, refreshPost }) {
             id: key,
             ...data[key],
           };
-
           posts.push(post);
         }
         setIsLoading(false);
