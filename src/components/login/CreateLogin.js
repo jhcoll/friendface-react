@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import action from "../posts/buttons/Button.module.css";
 import Post from "../UI/Post";
 import classes from "./CreateLogin.module.css";
+import { API_KEY } from "../../Local-config";
 
 function CreateLoginForm({ setShowError, setErrorText, setIdToken }) {
   const [emailError, setEmailError] = useState("");
@@ -24,7 +25,7 @@ function CreateLoginForm({ setShowError, setErrorText, setIdToken }) {
 
   function createAccount(account) {
     fetch(
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=",
+      `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${API_KEY}`,
       {
         method: "POST",
         body: JSON.stringify(account),

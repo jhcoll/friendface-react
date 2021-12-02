@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import CreateLoginForm from "../components/login/CreateLogin";
 import Backdrop from "../components/UI/Backdrop";
+import { API_KEY } from "../Local-config";
 
 function LoginPage({ setShowError, setErrorText, setIdToken }) {
   const [showCreateLogin, setShowCreateLogin] = useState(false);
@@ -24,7 +25,7 @@ function LoginPage({ setShowError, setErrorText, setIdToken }) {
     };
 
     fetch(
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=",
+      `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${API_KEY}`,
       {
         method: "POST",
         body: JSON.stringify(account),
