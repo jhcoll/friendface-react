@@ -4,10 +4,15 @@ import classes from "./MainNavigation.module.css";
 import Backdrop from "../UI/Backdrop";
 import ErrorModal from "../UI/ErrorModal";
 
-function MainNavigation({ setRefreshPost }) {
+function MainNavigation({
+  setRefreshPost,
+  showError,
+  setShowError,
+  errorText,
+  setErrorText,
+}) {
   const [showForm, setShowForm] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [errorText, setErrorText] = useState("");
+
   function addForm() {
     setShowForm(true);
   }

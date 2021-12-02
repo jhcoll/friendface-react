@@ -29,7 +29,6 @@ function AddPostForm({ onCancel, onAddPost, setErrorText, setShowError }) {
       };
 
       onAddPost(postData);
-    } else {
     }
   }
 
