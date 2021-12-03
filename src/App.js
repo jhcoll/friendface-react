@@ -8,8 +8,8 @@ function App() {
   const [refreshPost, setRefreshPost] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const [idToken, setIdToken] = useState();
-  const [userIdToken, setUserIdToken] = useState();
+  const [idToken, setIdToken] = useState("");
+  const [userId, setUserId] = useState("");
 
   if (!idToken) {
     return (
@@ -17,6 +17,7 @@ function App() {
         setShowError={setShowError}
         setErrorText={setErrorText}
         setIdToken={setIdToken}
+        setUserId={setUserId}
       />
     );
   }
@@ -29,6 +30,8 @@ function App() {
         setShowError={setShowError}
         errorText={errorText}
         setErrorText={setErrorText}
+        idToken={idToken}
+        userId={userId}
       />
       <div>
         <Routes>
@@ -47,6 +50,10 @@ function App() {
               <FeedPage
                 refreshPost={refreshPost}
                 setRefreshPost={setRefreshPost}
+                errorText={errorText}
+                setErrorText={setErrorText}
+                idToken={idToken}
+                userId={userId}
               />
             }
           />

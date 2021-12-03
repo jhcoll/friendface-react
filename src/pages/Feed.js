@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import OrderPosts from "../components/posts/OrderPosts.js";
 
-function FeedPage({ setRefreshPost, refreshPost }) {
+function FeedPage({
+  setRefreshPost,
+  refreshPost,
+  errorText,
+  setErrorText,
+  idToken,
+  userId,
+}) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedPosts, setLoadedPosts] = useState([]);
 
@@ -35,7 +42,13 @@ function FeedPage({ setRefreshPost, refreshPost }) {
   }
   return (
     <div>
-      <OrderPosts posts={loadedPosts}></OrderPosts>
+      <OrderPosts
+        posts={loadedPosts}
+        errorText={errorText}
+        setErrorText={setErrorText}
+        idToken={idToken}
+        userId={userId}
+      ></OrderPosts>
     </div>
   );
 }

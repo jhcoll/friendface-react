@@ -10,6 +10,8 @@ function MainNavigation({
   setShowError,
   errorText,
   setErrorText,
+  idToken,
+  userId,
 }) {
   const [showForm, setShowForm] = useState(false);
 
@@ -44,6 +46,8 @@ function MainNavigation({
             setRefreshPost={setRefreshPost}
             setErrorText={setErrorText}
             setShowError={setShowError}
+            idToken={idToken}
+            userId={userId}
           />
           <Backdrop onClick={cancelForm} />
         </>

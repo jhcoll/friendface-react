@@ -3,7 +3,7 @@ import PostList from "./PostList";
 import { useState } from "react";
 import action from "./buttons/Button.module.css";
 
-function OrderPosts({ posts }) {
+function OrderPosts({ posts, errorText, setErrorText, idToken, userId }) {
   const [orderUpDown, setOrderUpDown] = useState(true);
   const [authorDate, setAuthorDate] = useState(true);
   const btnColour = "#8b9dc3";
@@ -81,7 +81,13 @@ function OrderPosts({ posts }) {
           </button>
         </div>
       </div>
-      <PostList posts={posts} />
+      <PostList
+        posts={posts}
+        errorText={errorText}
+        setErrorText={setErrorText}
+        idToken={idToken}
+        userId={userId}
+      />
     </>
   );
 }

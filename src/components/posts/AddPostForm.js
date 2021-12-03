@@ -3,7 +3,7 @@ import Post from "../UI/Post";
 import classes from "./AddPostForm.module.css";
 import action from "./buttons/Button.module.css";
 
-function AddPostForm({ onCancel, onAddPost, setErrorText, setShowError }) {
+function AddPostForm({ onCancel, onAddPost, setErrorText, setShowError, userId }) {
   const authorInputRef = useRef();
   const avatarInputRef = useRef();
   const contentInputRef = useRef();
@@ -21,6 +21,7 @@ function AddPostForm({ onCancel, onAddPost, setErrorText, setShowError }) {
       contentInputRef.current.value = "";
 
       const postData = {
+        userId: userId,
         author: enteredAuthor,
         avatar: enteredAvatar,
         date: enteredDate,

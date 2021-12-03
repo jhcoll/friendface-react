@@ -7,12 +7,24 @@ import action from "./buttons/Button.module.css";
 import ButtonAction from "./buttons/ButtonAction";
 import { DeletePost, LikeHandler } from "./buttons/LikeDeleteFunctions";
 
-function PostItem({ likes, content, avatar, id, author, date }) {
+function PostItem({
+  likes,
+  content,
+  avatar,
+  id,
+  author,
+  date,
+  errorText,
+  setErrorText,
+  idToken,
+  userId,
+}) {
   const [showEdit, setShowEdit] = useState(false);
   const [likeCount, setLikeCount] = useState(likes);
   const [contentText, setContentText] = useState(content);
   const [postDelete, setPostDelete] = useState(true);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
 
   function editHandler() {
     setShowEdit(!showEdit);
@@ -22,6 +34,15 @@ function PostItem({ likes, content, avatar, id, author, date }) {
     setShowDeleteAlert(!showDeleteAlert);
   }
 
+  fetch(
+    `https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts/${id}/userId.json`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      setShowButtons(userId === data);
+    });
   return (
     <>
       {postDelete && (
@@ -54,10 +75,12 @@ function PostItem({ likes, content, avatar, id, author, date }) {
                   />
                   <div className={classes.likeCount}>{likeCount}</div>
                 </div>
-                <div className={classes.rightAction}>
-                  <button onClick={editHandler}>edit</button>
-                  <button onClick={deleteHandler}>delete</button>
-                </div>
+                {showButtons && (
+                  <div className={classes.rightAction}>
+                    <button onClick={editHandler}>edit</button>
+                    <button onClick={deleteHandler}>delete</button>
+                  </div>
+                )}
               </div>
             </div>
           </Post>
@@ -90,6 +113,10 @@ function PostItem({ likes, content, avatar, id, author, date }) {
                 id={id}
                 setContentText={setContentText}
                 contentText={contentText}
+                errorText={errorText}
+                setErrorText={setErrorText}
+                idToken={idToken}
+                userId={userId}
               />
               <Backdrop onClick={editHandler} />
             </>

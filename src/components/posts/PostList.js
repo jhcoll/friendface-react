@@ -1,7 +1,7 @@
 import PostItem from "./PostItem";
 import classes from "./PostList.module.css";
 
-function PostList({ posts }) {
+function PostList({ posts, errorText, setErrorText, idToken, userId }) {
   return (
     <>
       <ul className={classes.list}>
@@ -14,6 +14,10 @@ function PostList({ posts }) {
             date={post.date}
             content={post.content}
             likes={post.likes}
+            errorText={errorText}
+            setErrorText={setErrorText}
+            idToken={idToken}
+            userId={userId}
           />
         ))}
       </ul>

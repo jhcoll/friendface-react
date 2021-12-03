@@ -1,9 +1,16 @@
 import AddPostForm from "../components/posts/AddPostForm.js";
 
-function NewPostPage({ setRefreshPost, onCancel, setShowError, setErrorText }) {
+function NewPostPage({
+  setRefreshPost,
+  onCancel,
+  setShowError,
+  setErrorText,
+  idToken,
+  userId,
+}) {
   function onAddPostHandler(postData) {
     fetch(
-      "https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts.json",
+      `https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts.json?auth=${idToken}`,
       {
         method: "POST",
         body: JSON.stringify(postData),
@@ -11,9 +18,14 @@ function NewPostPage({ setRefreshPost, onCancel, setShowError, setErrorText }) {
           "Content-Type": "application/json",
         },
       }
-    ).then(() => {
-      setRefreshPost(true);
-      onCancel();
+    ).then((response) => {
+      if (response.status === 200) {
+        setRefreshPost(true);
+        onCancel();
+      } else {
+        setErrorText("Unauthorised Access");
+        setShowError(true);
+      }
     });
   }
   return (
@@ -23,6 +35,7 @@ function NewPostPage({ setRefreshPost, onCancel, setShowError, setErrorText }) {
         onCancel={onCancel}
         setShowError={setShowError}
         setErrorText={setErrorText}
+        userId={userId}
       />
     </div>
   );

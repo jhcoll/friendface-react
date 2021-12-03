@@ -3,17 +3,25 @@ import { useNavigate } from "react-router";
 import action from "../posts/buttons/Button.module.css";
 import Post from "../UI/Post";
 import classes from "./CreateLogin.module.css";
+import { API_KEY } from "../../Local-config";
 
-function CreateLoginForm({ setShowError, setErrorText, setIdToken }) {
+function CreateLoginForm({
+  setShowError,
+  setErrorText,
+  setIdToken,
+  setUserId,
+}) {
   const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
   const emailRef = useRef();
   const passRef = useRef();
+  const nameRef = useRef();
   let fireResp = false;
   function submitHandler(event) {
     event.preventDefault();
 
     const account = {
+      name: nameRef.current.value,
       email: emailRef.current.value,
       password: passRef.current.value,
       returnSecureToken: true,
@@ -24,7 +32,7 @@ function CreateLoginForm({ setShowError, setErrorText, setIdToken }) {
 
   function createAccount(account) {
     fetch(
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAaazs-kF0uByzgKnY4Di5bTGM-HOozi10",
+      `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${API_KEY}`,
       {
         method: "POST",
         body: JSON.stringify(account),
@@ -44,6 +52,7 @@ function CreateLoginForm({ setShowError, setErrorText, setIdToken }) {
       .then((data) => {
         if (fireResp === true) {
           setIdToken(data.idToken);
+          setUserId(data.localId);
           navigate("/feed");
         } else {
           setEmailError(data.error.message);
@@ -55,6 +64,7 @@ function CreateLoginForm({ setShowError, setErrorText, setIdToken }) {
       <Post>
         <h3>Create Account</h3>
         <div className={classes.content}>
+          <input placeholder="Name" ref={nameRef} />
           <input placeholder="Email" ref={emailRef} />
           <input placeholder="Password" ref={passRef} />
         </div>

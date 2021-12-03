@@ -3,12 +3,19 @@ import Post from "../../UI/Post";
 import classes from "./EditModal.module.css";
 import action from "./Button.module.css";
 
-function EditModal({ onClick, id, setContentText, contentText }) {
+function EditModal({
+  onClick,
+  id,
+  setContentText,
+  contentText,
+  idToken,
+  setErrorText,
+}) {
   const contentEditRef = useRef();
   function editPost() {
     const data = { content: contentEditRef.current.value };
     fetch(
-      `https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts/${id}.json`,
+      `https://friendface-react-e85cf-default-rtdb.firebaseio.com/posts/${id}.json?auth=${idToken}`,
       {
         method: "PATCH",
         body: JSON.stringify(data),
@@ -16,9 +23,14 @@ function EditModal({ onClick, id, setContentText, contentText }) {
           "Content-Type": "application/json",
         },
       }
-    );
-    setContentText(contentEditRef.current.value);
-    onClick();
+    ).then((response) => {
+      if (response.status === 200) {
+        setContentText(contentEditRef.current.value);
+        onClick();
+      } else {
+        setErrorText("Unauthorised Access");
+      }
+    });
   }
 
   return (

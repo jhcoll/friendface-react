@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import CreateLoginForm from "../components/login/CreateLogin";
 import Backdrop from "../components/UI/Backdrop";
+import { API_KEY } from "../Local-config";
 
-function LoginPage({ setShowError, setErrorText, setIdToken }) {
+function LoginPage({ setShowError, setErrorText, setIdToken, setUserId }) {
   const [showCreateLogin, setShowCreateLogin] = useState(false);
   const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function LoginPage({ setShowError, setErrorText, setIdToken }) {
     };
 
     fetch(
-      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAaazs-kF0uByzgKnY4Di5bTGM-HOozi10",
+      `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${API_KEY}`,
       {
         method: "POST",
         body: JSON.stringify(account),
@@ -44,6 +45,7 @@ function LoginPage({ setShowError, setErrorText, setIdToken }) {
       .then((data) => {
         if (fireResp === true) {
           setIdToken(data.idToken);
+          setUserId(data.localId);
           navigate("/feed");
         } else {
           setEmailError(data.error.message);
@@ -81,6 +83,7 @@ function LoginPage({ setShowError, setErrorText, setIdToken }) {
             setShowError={setShowError}
             setErrorText={setErrorText}
             setIdToken={setIdToken}
+            setUserId={setUserId}
           />
           <Backdrop onClick={createLoginHandler} />
         </>
